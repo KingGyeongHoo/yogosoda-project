@@ -1,7 +1,7 @@
 'use client';
 
 import SplashTitle from './components/SplashTitle';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import ToLandingButton from './components/ToLandingButton';
 import RecommendMobile from './components/RecommendMobile';
@@ -11,6 +11,9 @@ export default function Splash() {
 
     const [startPoint, setStartPoint] = useState(0);
     const [translate, setTranslate] = useState(0);
+    const [windowWidth, setWindowWidth] = useState(
+        typeof window !== 'undefined' ? window.innerWidth : 0
+    );
 
     const startSwipe = (e: React.TouchEvent) => {
         //eslint-disable-next-line
@@ -39,6 +42,18 @@ export default function Splash() {
         }
     };
 
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const transform = windowWidth < 768 ? `translateX(${translate}px)` : 'none';
+
     return (
         <div
             ref={ref}
@@ -49,9 +64,7 @@ export default function Splash() {
             onTouchStart={startSwipe}
             onTouchMove={moveSwipe}
             onTouchEnd={endSwipe}
-            style={{
-                transform: `translateX(${translate}px)`,
-            }}
+            style={{ transform }}
         >
             <SplashTitle />
             <ToLandingButton />

@@ -12,6 +12,7 @@ import {
     neoLight,
     neoRegular,
 } from '@dev/shared/constants/fonts';
+import RedirectOnResize from '@dev/shared/components/RedirectOnResize';
 
 export const metadata: Metadata = {
     title: {
@@ -30,6 +31,7 @@ export default function RootLayout({
             <body
                 className={`${neoLight.variable} ${neoRegular.variable} ${neoBold.variable} ${neoExtraBold.variable} ${neoHeavy.variable} ${cafe24Ssurround.variable}`}
             >
+                <RedirectOnResize />
                 {children}
             </body>
         </html>
