@@ -7,8 +7,11 @@ import { UseSendMessage } from '@devfeatures/chatBot/chatting/model';
 import { StartMessage } from '@devShared/constants/chatBot/message';
 import ChatBotMessage from '@devWidgets/chatBot/botMessage/ChatBotMessage';
 import Chatting from '@devWidgets/chatBot/chatting/Chatting';
+import { ReactComponent as RightArrow } from '@devShared/svg/chevron-right-solid.svg';
+import { useRouter } from 'next/navigation';
 
 const Yogo = () => {
+    const router = useRouter();
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [inputMessage, setInputMessage] = useState<string>('');
 
@@ -29,7 +32,18 @@ const Yogo = () => {
 
     return (
         <div className={'max-h-screen block overflow-hidden'}>
-            <header className={'w-full h-[5rem] item-center'}>
+            <header className={'relative w-full h-[5rem] item-center'}>
+                <div
+                    className="absolute top-1/2 left-4 w-fit h-4 -translate-y-1/2"
+                    onClick={() => router.back()}
+                >
+                    <RightArrow
+                        width={24}
+                        height={24}
+                        fill="black"
+                        className="rotate-180"
+                    />
+                </div>
                 <img src={yogo} alt={'요고봇'} width={100} height={50} />
             </header>
             <main

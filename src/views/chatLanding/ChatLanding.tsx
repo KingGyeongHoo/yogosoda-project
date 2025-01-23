@@ -1,11 +1,28 @@
+'use client';
+
 import yogo from '@devShared/images/chatBot/yogo.svg';
 import chatbotLogo from '@devShared/images/chatBot/chatbot_logo.svg';
+import { ReactComponent as RightArrow } from '@devShared/svg/chevron-right-solid.svg';
 import PageMove from '@devShared/components/PageMove';
+import { useRouter } from 'next/navigation';
 
 const ChatLanding = () => {
+    const router = useRouter();
     return (
         <div className={'h-[100vh]'}>
-            <header className={'w-full h-[1vh] bg-[#01A59B]'}></header>
+            <header className={'w-full h-[1vh] bg-[#01A59B]'}>
+                <div
+                    className="w-fit h-4 py-7 px-4"
+                    onClick={() => router.back()}
+                >
+                    <RightArrow
+                        width={24}
+                        height={24}
+                        fill="black"
+                        className="rotate-180"
+                    />
+                </div>
+            </header>
             <main
                 className={
                     'w-full h-[99vh] flex flex-col justify-between items-center pt-[5rem] pb-[3rem] gap-5'
